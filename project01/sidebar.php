@@ -1,4 +1,10 @@
 <!-- Main Sidebar Container -->
+<?php
+session_start();
+if (!$_SESSION['user']) {
+    header("location:login.php");
+}
+?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -15,7 +21,7 @@
                 <img src="dist/img/avatar4.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Diah ayu puspasari</a>
+                <a href="#" class="d-block"><?= $_SESSION['user']['username']; ?></a>
             </div>
         </div>
 
