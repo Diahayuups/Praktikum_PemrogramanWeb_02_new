@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <?php
@@ -23,7 +24,7 @@ if (isset($_POST['submit'])) {
         session_start();
 
         $_SESSION['user'] = $user->fetch();
-        header("location:index.php");
+        header("location:index1.php");
     } else { // jika gagal login
         header("location:login.php");
     }
@@ -32,22 +33,24 @@ if (isset($_POST['submit'])) {
 ?>
 
 <body>
-    <div>
-        <form action="" method="POST">
-            <div>
+    <div class="container">
+        <div class="login">
+            <form action="index1.php" method="POST">
+                <h1>Login</h1>
+                <hr>
+                <p>Selamat datang & Selamat Bekerja</p>
+
+                <hr>
                 <label for="">Email</label>
                 <input type="email" name="email" required>
-            </div>
-            <br>
-            <div>
                 <label for="">Password</label>
                 <input type="password" name="password" required>
-            </div>
-            <br>
-            <div>
                 <button type="submit" name="submit">Login</button>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="right">
+            <img src="image.png" alt="">
+        </div>
     </div>
 </body>
 
