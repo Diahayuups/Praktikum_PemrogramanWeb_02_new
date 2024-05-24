@@ -9,6 +9,8 @@
 </head>
 
 <?php
+session_start(); // Panggil session_start() di awal
+
 if (isset($_POST['submit'])) {
     require_once 'dbkoneksi.php';
 
@@ -18,28 +20,28 @@ if (isset($_POST['submit'])) {
         $_POST['password']
     ]);
 
-    $count = $user->rowCount(); //untuk memastikan user tersedia atau tidak
+    $count = $user->rowCount(); // untuk memastikan user tersedia atau tidak
 
     if ($count > 0) {
-        session_start();
-
         $_SESSION['user'] = $user->fetch();
         header("location:index1.php");
+        exit(); // tambahkan exit() setelah header untuk memastikan tidak ada kode ekstra yang dijalankan setelah pengalihan
     } else { // jika gagal login
-        header("location:login.php");
+        $error = "Email atau password salah"; // Simpan pesan kesalahan dalam variabel
     }
 }
-
 ?>
 
 <body>
     <div class="container">
         <div class="login">
-            <form action="index1.php" method="POST">
+            <form action="login.php" method="POST"> <!-- Ubah action ke login.php -->
                 <h1>Login</h1>
                 <hr>
+                <?php if (isset($error)): ?> <!-- Tampilkan pesan kesalahan jika ada -->
+                    <p><?php echo $error; ?></p>
+                <?php endif; ?>
                 <p>Selamat datang & Selamat Bekerja</p>
-
                 <hr>
                 <label for="">Email</label>
                 <input type="email" name="email" required>
@@ -53,5 +55,6 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </body>
+
 
 </html>
